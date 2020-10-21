@@ -2,4 +2,4 @@
 
 Progetto per esercizi e lezioni della **4I**.
 
-ciao a tutti
+ciao a Edoardo & Co

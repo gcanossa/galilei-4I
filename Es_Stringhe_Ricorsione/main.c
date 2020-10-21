@@ -2,27 +2,11 @@
 
 void stampa(char* s); // char[]
 
-/*
-    command:    ./main pippo pluto
-    argv:
-    x    0 1 2 3 4 5 6 7 8
-    0    . / m a i n \0
-    1    p i p p o \0
-    2    p l u t o \0
-
-*/
-
-
 int main(int argc, char** argv) { // char[][]
-    int i;
-
-    printf("%d\n", argc);
-
-    for(i=0; i<argc; i++){
-        stampa(*(argv+i)); // argv[i]
-
-        printf("\n");
-    }
+    if(argc == 1)
+        printf("Ciao mondo\n");
+    else
+        printf("Ciao %s\n", argv[1]);
 }
 
 void stampa(char* s){

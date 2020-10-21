@@ -26,8 +26,8 @@ int main(int argc, char** argv) { // char[][]
 }
 
 void stampa(char* s){
-    while(*s!='\0'){
-        printf("%c", *s);
-        s++;
+    if(*s!='\0'){
+        printf("%c",*s);
+        stampa(s+1);
     }
 }

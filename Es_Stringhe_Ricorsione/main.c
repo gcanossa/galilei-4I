@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 void stampa(char* s); // char[]
+void stampaRev(char* s); // char[]
 
 /*
     command:    ./main pippo pluto
@@ -29,5 +30,14 @@ void stampa(char* s){
     if(*s!='\0'){
         printf("%c",*s);
         stampa(s+1);
+    }
+}
+
+// a e r e o
+
+void stampaRev(char* s){
+    if(*s!='\0'){
+        stampa(s+1);
+        printf("%c",*s);
     }
 }

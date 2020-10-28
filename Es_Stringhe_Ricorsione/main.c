@@ -17,13 +17,20 @@ void stampaRev(char* s); // char[]
 int main(int argc, char** argv) { // char[][]
     int i;
 
+    if(argc<=1){
+        printf("Mancano argomenti, mettine almeno uno\n");
+        return 1;
+    }
+
     printf("%d\n", argc);
 
-    for(i=0; i<argc; i++){
+    for(i=1; i<argc; i++){
         stampaRev(*(argv+i)); // argv[i]
 
         printf("\n");
     }
+
+    return 0;
 }
 
 void stampa(char* s){
@@ -68,9 +75,9 @@ void stampaRev(char* s){
 1) -> p
 */
 
-void stampaRev(char* s){
-    if(*s!='\0'){
-        stampaRev(s+1);
-        printf("%c",*s);
-    }
-}
+// void stampaRev(char* s){
+//     if(*s!='\0'){
+//         stampaRev(s+1);
+//         printf("%c",*s);
+//     }
+// }

@@ -1,0 +1,46 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<ul>
+			<li>uno</li>
+			<li>due</li>
+			<li>tre</li>
+        </ul>
+        
+        <script>
+            console.log("Hello world!");
+
+            function fatt(n){
+                if(n<=0)
+                    return 1;
+                else
+                    return n * fatt(n-1);
+            }
+
+            console.log(fatt(5));
+
+            let x = 6;
+            console.log(x);
+
+            x = "ciao";
+            console.log(x);
+
+            x = [1,10,44];
+            console.log(x);
+
+            var y = 4;
+            const z = 3;
+
+            x.push(33);
+
+            for(let i = 0; i < x.length; i++)
+            {
+                console.log(x[i]); // *(x+i) NO!!!!
+            }
+
+            console.log(x[0]+" "+x[1]+" "+x[2]);
+
+        </script>
+	</body>
+</html>

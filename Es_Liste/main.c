@@ -22,6 +22,10 @@ typedef struct elemento {
 int head(Elemento* lista);
 Elemento* tail(Elemento* lista);
 Elemento* addToHead(Elemento* lista, int value);
+Elemento* addToEnd(Elemento* lista, int value);
+void addToEndRef(Elemento** lista, int value);
+
+Elemento* addOrdered(Elemento* lista, int value);
 
 void stampaLista(Elemento* lista);
 void stampaListaRev(Elemento* lista);
@@ -42,6 +46,42 @@ int main(){
     stampaLista(s);
     printf("\n");
     stampaListaRev(s);
+    printf("\n");
+
+    addToEnd(s, 1);
+    addToEnd(s, 103);
+
+    Elemento* q = NULL;
+
+    q = addToEnd(q, 4);
+    addToEndRef(&q, 8);
+
+    stampaLista(q);
+    printf("\n");
+
+    Elemento* m = NULL;
+    addToEndRef(&m, 7);
+    addToEnd(m, 6);
+
+    stampaLista(m);
+    printf("\n");
+
+    Elemento* ord = NULL;
+
+    ord = addOrdered(ord, 3);
+    stampaLista(ord);
+    printf("\n");
+
+    ord = addOrdered(ord, 9);
+    stampaLista(ord);
+    printf("\n");
+
+    ord = addOrdered(ord, 7);
+    stampaLista(ord);
+    printf("\n");
+
+    ord = addOrdered(ord, 8);
+    stampaLista(ord);
     printf("\n");
 
     return 0;
@@ -89,4 +129,87 @@ Elemento* addToHead(Elemento* lista, int value){
     newHead->next = lista;
 
     return newHead;
+}
+
+Elemento* addToEnd(Elemento* lista, int value){
+    if(lista == NULL){ // lista vuota 0 elementi
+        Elemento* newEnd = (Elemento*)malloc(sizeof(Elemento));
+
+        newEnd->next = NULL;
+        newEnd->value = value;
+
+        return newEnd;
+    }
+    else if(lista->next == NULL){ // lista contiene 1 solo elemento
+        Elemento* newEnd = (Elemento*)malloc(sizeof(Elemento));
+
+        newEnd->next = NULL;
+        newEnd->value = value;
+        lista->next = newEnd;
+    }
+    else{ // lista contiene n elementi
+        addToEnd(lista->next, value);
+    }
+
+    return lista;
+}
+
+
+void addToEndRef(Elemento** lista, int value){
+    if(*lista == NULL){
+        Elemento* newEnd = (Elemento*)malloc(sizeof(Elemento));
+
+        newEnd->next = NULL;
+        newEnd->value = value;
+
+        *lista = newEnd;
+    }
+    else if((*lista)->next == NULL){
+        Elemento* newEnd = (Elemento*)malloc(sizeof(Elemento));
+
+        newEnd->next = NULL;
+        newEnd->value = value;
+        (*lista)->next = newEnd;
+    }
+    else{
+        addToEndRef(&(*lista)->next, value);
+    }
+}
+
+Elemento* addOrdered(Elemento* lista, int value){
+    if(lista == NULL){ // lista vuota con 0 elementi
+        Elemento* newElement = (Elemento*)malloc(sizeof(Elemento));
+
+        newElement->next = NULL;
+        newElement->value = value;
+
+        return newElement;
+    }
+    else if(lista->next == NULL){ // lista con un solo elemento
+        Elemento* newElement = (Elemento*)malloc(sizeof(Elemento));
+
+        newElement->value = value;
+
+        if(lista->value < value){
+            lista->next = newElement;
+            newElement->next = NULL;
+        }
+        else{
+            newElement->next = lista;
+            return newElement;
+        }
+    }
+    else if(lista->next->value < value){ // elemento corrente non è l'ultimo dei minori di value
+        addOrdered(lista->next, value);
+    }
+    else{ // sono sull'ultimo elemento minore di value
+        Elemento* newElement = (Elemento*)malloc(sizeof(Elemento));
+
+        newElement->value = value;
+
+        newElement->next = lista->next;
+        lista->next = newElement;
+    }
+
+    return lista;
 }

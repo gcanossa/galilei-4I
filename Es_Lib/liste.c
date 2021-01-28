@@ -1,5 +1,6 @@
-#include "liste.h";
+#include "liste.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void stampaLista(Elemento* lista){
     if(lista!=NULL){
@@ -166,7 +167,7 @@ int length(Elemento* lista){
     }
 }
 
-Elemento* remove(Elemento* lista, int value){
+Elemento* removeFromList(Elemento* lista, int value){
     if(lista == NULL){ // lista vuota con 0 elementi
         return lista;
     }
@@ -181,7 +182,7 @@ Elemento* remove(Elemento* lista, int value){
         return lista;
     }
     else if(lista->next->value != value){ // elemento corrente non è l'ultimo dei minori di value
-        remove(lista->next, value);
+        removeFromList(lista->next, value);
     }
     else{ // sono sull'ultimo elemento minore di value
         Elemento* tmp = lista->next;

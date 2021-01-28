@@ -17,4 +17,4 @@ void stampaListaRev(Elemento* lista);
 int find(Elemento* lista, int value);
 int findIndex(Elemento* lista, int value);
 int length(Elemento* lista);
-Elemento* remove(Elemento* lista, int value);
+Elemento* removeFromList(Elemento* lista, int value);

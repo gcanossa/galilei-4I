@@ -130,6 +130,17 @@ void addIfNotPresent(Persona **destination, int* length, Persona p){
         *destination = (Persona*) realloc(*destination, (*length+1)*sizeof(Persona));
         *(*destination+*length)=p;
         *length++;
+        
+        // Persona* tmp = (Persona*) malloc((*length+1)*sizeof(Persona));
+
+        // for(int i=0;i<*length;i++){
+        //     *(tmp+i)=*(*destination+i);
+        // }
+        // *(tmp+*length)=p;
+        // *length++;
+
+        // free(*destination);
+        // *destination=tmp;
     }
 }
 

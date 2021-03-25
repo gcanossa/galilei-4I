@@ -2,9 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+// typedef struct persona {
+//     char nome[20];
+//     char cognome[20];
+//     int annoNascita;
+// } Persona;
+
 typedef struct persona {
-    char nome[20];
-    char cognome[20];
+    char* nome;
+    char* cognome;
     int annoNascita;
 } Persona;
 
@@ -82,6 +88,9 @@ Persona* newPersona(char* nome, char* cognome, int annoNascita)
 {
     Persona* value = (Persona*)malloc(sizeof(Persona));
 
+    value->nome = (char*)malloc(sizeof(char)*(strlen(nome)+1));
+    value->cognome = (char*)malloc(sizeof(char)*(strlen(cognome)+1));
+
     strcpy(value->nome, nome);
     strcpy(value->cognome, cognome);
     value->annoNascita=annoNascita;
@@ -104,6 +113,8 @@ int equalsPersona(Persona* p1, Persona* p2)
 
 void setNomePersona(Persona* p, char* nome)
 {
+    free(p->nome);
+    p->nome = (char*)malloc(sizeof(char)*(strlen(nome)+1));
     strcpy(p->nome, nome);
 
     if(p->nome[0] >= 'a' && p->nome[0]<='z')
@@ -114,6 +125,8 @@ void setNomePersona(Persona* p, char* nome)
 
 void setCognomePersona(Persona* p, char* cognome)
 {
+    free(p->cognome);
+    p->cognome = (char*)malloc(sizeof(char)*(strlen(cognome)+1));
     strcpy(p->cognome, cognome);
 
     if(p->cognome[0] >= 'a' && p->cognome[0]<='z')
@@ -221,9 +234,21 @@ void save(Nodo* list, char* path)
 {
     FILE* fp = fopen(path, "wb");
 
+    int size;
     while (list!=NULL)
     {
-        fwrite(list->value, sizeof(Persona), 1, fp);
+        size = strlen(list->value->nome)+1;
+        fwrite(&size, sizeof(int), 1, fp);
+        fwrite(list->value->nome, sizeof(char), size, fp);
+
+        size = strlen(list->value->cognome)+1;
+        fwrite(&size, sizeof(int), 1, fp);
+        fwrite(list->value->cognome, sizeof(char), size, fp);
+
+        size = sizeof(int);
+        fwrite(&size, sizeof(int), 1, fp);
+        fwrite(&list->value->annoNascita, sizeof(int), 1, fp);
+
         list=list->next;
     }
     
@@ -237,9 +262,33 @@ Nodo* load(char* path)
     Persona p;
     Nodo* list = NULL;
 
-    while (fread(&p,sizeof(Persona),1,fp)!=0)
+    int size;
+
+    int iteamsRead=1;
+
+    while (iteamsRead)
     {
+        // int n;
+        // while ((n=fread(&size, 1, 10*1024, fp))!=0)
+        // {
+        //     /* code */
+        // }
+
+        iteamsRead=fread(&size, sizeof(int), 1, fp);
+        p.nome = (char*)malloc(size);
+        iteamsRead=fread(&p.nome, sizeof(char), size, fp);
+
+        iteamsRead=fread(&size, sizeof(int), 1, fp);
+        p.cognome = (char*)malloc(size);
+        iteamsRead=fread(&p.cognome, sizeof(char), size, fp);
+
+        iteamsRead=fread(&size, sizeof(int), 1, fp);
+        iteamsRead=fread(&p.annoNascita, sizeof(int), 1, fp);
+        
         add(&list, newPersona(p.nome, p.cognome, p.annoNascita));
+
+        free(p.nome);
+        free(p.cognome);
     }
 
     // Persona* q = newPersona("","",-1);

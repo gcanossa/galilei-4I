@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Program {
     public static void main(String args[]){
         System.out.println("Ciao mondo");
@@ -11,6 +13,11 @@ public class Program {
         Program y = new Program();
         y.nome="Carlo";
         y.scriviCiao();
+
+        Persona p = new Persona("Piero", "Rossi", LocalDate.of(1950, 3, 15), "Assassino");
+
+        System.out.println(p);
+        p.Agisci();
     }
 
     public String nome;

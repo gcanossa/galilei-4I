@@ -1,8 +1,17 @@
 import java.time.LocalDate;
+import java.util.Iterator;
 
 public class Program {
     public static void main(String args[]){
         System.out.println("Ciao mondo");
+
+        for(int i=0;i<args.length;i++){
+            System.out.println(args[i]);
+        }
+
+        // for(String value : args){
+        //     System.out.println(value);
+        // }
 
         Program.scriviBau();
 

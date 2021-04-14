@@ -1,8 +1,10 @@
-public class Esempio{
+public class Esempio<T>{
 
     public String nome;
 
     private int anni;
+
+    public T valore;
 
     public void salutaNome(){
         System.out.println("Ciao "+this.nome);

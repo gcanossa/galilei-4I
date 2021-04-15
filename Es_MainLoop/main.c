@@ -11,9 +11,9 @@ void render(Scene s, int frameRate);
 void updateScene(Scene* s);
 void manageCommand(Scene* s);
 
-int main(){
+#define SCREEN_SIZE 20
 
-    int screen_size = 20;
+int main(){
 
     Scene status = {0, 0};
 
@@ -34,22 +34,22 @@ void render(Scene s, int frameRate){
     
     system("cls");
 
-    for(int i=0;i<position;i++){
+    for(int i=0;i<s->position;i++){
         printf(" ");
     }
     printf("o");
 }
 
 void updateScene(Scene* s){
-    if(dir==0)
-        position++;
-    else if(dir==1)
-        position--;
+    if(s->dir==0)
+        s->position++;
+    else if(s->dir==1)
+        s->position--;
 
-    if(position==screen_size)
-        dir=1;
-    if(position==0)
-        dir=0;
+    if(s->position==SCREEN_SIZE)
+        s->dir=1;
+    if(s->position==0)
+        s->dir=0;
 }
 
 void manageCommand(Scene* s){

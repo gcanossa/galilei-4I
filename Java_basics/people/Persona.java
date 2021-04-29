@@ -15,6 +15,7 @@ public abstract class Persona implements ICamminatore, ICantante {
 
     @Deprecated
     public void lamentati(){
+        this.parla();
         System.out.println("Ufffa");
     }
 

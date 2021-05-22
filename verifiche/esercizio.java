@@ -101,3 +101,7 @@ public class Wizard extends UserBase {
         this.equipImpl(item);
     }
 }
+
+public interface Machinegun {
+    void shoot();
+}

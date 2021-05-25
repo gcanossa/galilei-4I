@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+
+        <button id="btn-load">Carica</button>
+        <div id="container">
+
+        </div>
+        
+        <script>
+            // const ctn = document.querySelector("#container");
+            // document.querySelector("#btn-load").addEventListener("click",()=>{
+
+            //     fetch("data.json").then(res=>{
+            //         res.json().then(data=>{
+            //             // for(let item of data){
+            //             //     
+
+            //             //     ctn.appendChild(p);
+            //             // }
+
+            //             data.map(item=> {
+            //                 let p = document.createElement("p");
+            //                 p.innerHTML = item.name;
+            //                 return p;
+            //             })
+            //             // .forEach(p => ctn.appendChild(p));
+            //             .forEach(function(p) { ctn.appendChild(p); });
+            //         });
+            //     });
+
+            // });
+
+            // const $cnt = $("#container");
+
+            // $("#btn-load").on("click", ()=>{
+            //     $.get("data.json").done(res=>{
+            //         // res.map(item=> {
+            //         //     let p = $("<p>");
+            //         //     p.text(item.name);
+            //         //     return p;
+            //         // })
+            //         // .forEach(p => $cnt.append(p));
+
+            //         $.each(res, (i, item)=>{
+            //             let p = $("<p>");
+            //             p.text(item.name);
+            //             $cnt.append(p)
+            //         })
+            //     });
+            // });
+
+            const ctn = document.querySelector("#container");
+            document.querySelector("#btn-load").addEventListener("click", async ()=>{
+
+                let res = await fetch("data.json");
+                let data = await res.json();
+                // for(let item of data){
+                //     
+
+                //     ctn.appendChild(p);
+                // }
+
+                data.map(item=> {
+                    let p = document.createElement("p");
+                    p.innerHTML = item.name;
+                    return p;
+                })
+                // .forEach(p => ctn.appendChild(p));
+                .forEach(function(p) { ctn.appendChild(p); });
+
+            });
+        </script>
+    </body>
+</html>
